@@ -15,3 +15,4 @@ Tested "http://localhost/~evan/" and it works
 Set "AllowOverride All" in httpd.conf
 (Did not set to allow URL rewrites, at least not yet)
 Uncommented "LoadModule php7_module libexec/apache2/libphp7.so" (The ref I'm using said php5, but that is dated)
+The test doc doesn't really work
