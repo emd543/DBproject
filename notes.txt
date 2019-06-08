@@ -12,3 +12,5 @@ Uncommented "LoadModule userdir_module libexec/apache2/mod_userdir.so" in /etc/a
 Uncommented "Include /private/etc/apache2/extra/httpd-userdir.conf" in the same file
 Uncommented "Include /private/etc/apache2/users/*.conf" in /etc/apache2/extra/httpd-userdir.conf
 Tested "http://localhost/~evan/" and it works
+Set "AllowOverride All" in httpd.conf
+(Did not set to allow URL rewrites, at least not yet)
