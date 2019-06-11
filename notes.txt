@@ -19,3 +19,4 @@ The test doc doesn't really work
 Install and set up MySQL. Get an error when starting MySQL via bash, since the server quits without updating the PID file
 Added "export PATH="/usr/local/mysql/bin:$PATH" to .bash_profile and restarted bash
 mysql -v still doesn't work
+Test MySQL
