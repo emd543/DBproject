@@ -20,4 +20,5 @@ Install and set up MySQL. Get an error when starting MySQL via bash, since the s
 Added "export PATH="/usr/local/mysql/bin:$PATH" to .bash_profile and restarted bash
 mysql -v still doesn't work
 Test MySQL, still having problems.
-Uninstalled MySQL 8, downloaded and installed MySQL 5.7.26 instead
+Uninstalled MySQL 8, downloaded and installed MySQL 5.7.26 instead. Set this up more properly, and it seems to actually work now.
+Installed PopSQL, as a more pleasant interface for using MySQL. But will also use the command line to get used to both.
