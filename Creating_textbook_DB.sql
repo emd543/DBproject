@@ -1,3 +1,6 @@
+--Creates all of the relevent relations used in my Databases
+--textbook. (Add textbook copyright info, etc)
+
 CREATE DATABASE textbook;
 
 --Department
@@ -195,3 +198,21 @@ INSERT INTO takes values('98765', 'CS-101', '1', 'Fall', 2009, 'C-');
 INSERT INTO takes values('98765', 'CS-315', '1', 'Spring', 2010, 'B');
 INSERT INTO takes values('98988', 'BIO-101', '1', 'Summer', 2009, 'A');
 INSERT INTO takes values('98988', 'BIO-301', '1', 'Summer', 2010, NULL);
+
+--Views
+CREATE VIEW physics_fall_2009 AS
+  SELECT course.course_id, sec_id, building, room_number
+  FROM course, section
+  WHERE course.course_id = section.course_id
+  AND course.dept_name = 'Physics'
+  AND section.semester = 'Fall'
+  AND section.year = '2009';
+CREATE VIEW departments_total_salary(dept_name, total_salary) AS
+  SELECT dept_name, SUM(salary)
+  FROM instructor
+  GROUP BY dept_name;
+CREATE VIEW physics_fall_2009_watson AS
+  SELECT course_id, room_number
+  FROM physics_fall_2009
+  WHERE building = 'Watson';
+  
