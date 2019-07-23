@@ -1,0 +1,5 @@
+Evan DiPetrillo - emd543 - N13515282
+Database Systems - CS-6083 - Summer 2019
+Homework #1
+
+a. Record has three attributes (sid, uid, date) in its primary key because that is the minimal possible superkey (candidate key) for that relation. It is almost certain that some users will play the same song more than once, which would mean that sid and uid together are not sufficient to be a superkey, and thus the tuple (sid, uid) cannot be the primary key. Similarly, because a user could play multiple songs on the same day, or different users could play the same song on the same day, both (uid, date) and (sid, date) are also insufficient.

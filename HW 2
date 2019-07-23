@@ -1,0 +1,61 @@
+CREATE TABLE goods(
+gid INT,
+gname VARCHAR(20),
+gtype VARCHAR(20),
+PRIMARY KEY (gid)
+);
+INSERT INTO goods VALUES(100, 'Jeeps', 'Cars');
+INSERT INTO goods VALUES(101, 'Toyotas', 'Cars');
+
+CREATE TABLE company(
+cid INT,
+cname VARCHAR(20),
+ccountry VARCHAR(20),
+PRIMARY KEY (cid)
+);
+INSERT INTO company VALUES(100, 'EvCo', 'USA');
+INSERT INTO company VALUES(101, 'OtherCo', 'Canada');
+
+CREATE TABLE port(
+pid INT,
+pname VARCHAR(20),
+pcity VARCHAR(20),
+pcountry VARCHAR(20),
+PRIMARY KEY (pid)
+);
+INSERT INTO port VALUES(100, 'Long Beach', 'Los Angeles', 'USA');
+INSERT INTO port VALUES(101, 'Shanghai', 'Shanghai', 'China');
+
+CREATE TABLE searoute(
+rid INT,
+cid INT,
+start_port INT,
+end_port INT,
+dept_date DATE,
+arr_date DATE,
+PRIMARY KEY (rid),
+FOREIGN KEY (cid) REFERENCES company(cid) ON DELETE CASCADE,
+FOREIGN KEY (start_port) REFERENCES port(pid) ON DELETE CASCADE,
+FOREIGN KEY (end_port) REFERENCES port(pid) ON DELETE CASCADE
+);
+INSERT INTO searoute VALUES(100, 100, 101, 100, '2018-03-01', '2018-04-04');
+INSERT INTO searoute VALUES(101, 101, 101, 100, '2018-03-01', '2018-04-10');
+
+CREATE TABLE records(
+gid INT,
+rid INT,
+date DATE,
+price NUMERIC(10,2),
+PRIMARY KEY(gid, rid, date),
+FOREIGN KEY (gid) REFERENCES goods(gid) ON DELETE CASCADE,
+FOREIGN KEY (rid) REFERENCES searoute(rid) ON DELETE CASCADE
+);
+INSERT INTO records VALUES(100, 100, '2018-03-01', 100.00);
+INSERT INTO records VALUES(101, 101, '2018-03-01', 150.00);
+
+WITH results AS (select rid, gid, gtype, start_port,
+T.pcountry AS start_country, end_port, S.pcountry as end_country
+from (goods natural join records natural join searoute), port AS S, port AS T
+where gtype = 'Cars' AND start_port=T.pid AND end_port=S.pid
+AND T.pcountry='China' AND S.pcountry='USA' AND date='2018-03-01')
+SELECT COUNT(*) FROM results;
