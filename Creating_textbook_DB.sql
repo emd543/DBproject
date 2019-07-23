@@ -215,4 +215,8 @@ CREATE VIEW physics_fall_2009_watson AS
   SELECT course_id, room_number
   FROM physics_fall_2009
   WHERE building = 'Watson';
+CREATE VIEW instructor_info AS
+  SELECT ID, name, building
+  FROM instructor, department
+  WHERE instructor.dept_name = department.dept_name;
   
