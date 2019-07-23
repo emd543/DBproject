@@ -3,7 +3,7 @@
 
 CREATE DATABASE textbook;
 
---Department
+--department
 create table department(
   dept_name VARCHAR(20),
   building VARCHAR(15),
@@ -18,7 +18,7 @@ insert into department VALUES('Finance', 'Painter', 120000);
 insert into department VALUES('History', 'Painter', 50000);
 insert into department VALUES('Physics', 'Watson', 70000);
 
---Instructor
+--instructor
 create table instructor(
   ID VARCHAR(5),
   name VARCHAR(20) NOT NULL,
@@ -41,7 +41,7 @@ insert into instructor VALUES(15151, 'Mozart', 'Music', 40000);
 insert into instructor VALUES(33456, 'Gold', 'Physics', 87000);
 insert into instructor VALUES(76543, 'Singh', 'Finance', 80000);
 
---Course
+--course
 create table course(
   course_id VARCHAR(7),
   title VARCHAR(50),
@@ -65,7 +65,7 @@ insert into course VALUES('HIS-351', 'World History', 'History', 3);
 insert into course VALUES('MU-199', 'Music Video Production', 'Music', 3);
 insert into course VALUES('PHY-101', 'Physical Principles', 'Physics', 4);
 
---Prereq
+--prereq
 create table prereq(
   course_id VARCHAR(7),
   prereq_id VARCHAR(7),
@@ -83,7 +83,7 @@ insert into prereq VALUES('CS-319', 'CS-101');
 insert into prereq VALUES('CS-347', 'CS-101');
 insert into prereq VALUES('EE-181', 'PHY-101');
 
---Section
+--section
 create table section(
   course_id VARCHAR(8),
   sec_id VARCHAR(8),
@@ -93,8 +93,10 @@ create table section(
   room_number VARCHAR(7),
   time_slot_id VARCHAR(4),
   PRIMARY KEY(course_id, sec_id, semester, year),
-  FOREIGN KEY (course_id) REFERENCES course(course_id)
+  FOREIGN KEY (course_id) REFERENCES course(course_id),
+  CHECK (semester IN ('Fall', 'Winter', 'Spring', 'Summer'))
 );
+--ALTER TABLE section ADD CHECK (semester IN ('Fall', 'Winter', 'Spring', 'Summer'));
 insert into section VALUES('BIO-101', '1', 'Summer', 2009, 'Painter', '514', 'B');
 insert into section VALUES('BIO-301', '1', 'Summer', 2010, 'Painter', '514', 'A');
 insert into section VALUES('CS-101', '1', 'Fall', 2009, 'Packard', '101', 'H');
@@ -111,7 +113,7 @@ insert into section VALUES('HIS-351', '1', 'Spring', 2010, 'Painter', '514', 'C'
 insert into section VALUES('MU-199', '1', 'Spring', 2010, 'Packard', '101', 'D');
 insert into section VALUES('PHY-101', '1', 'Fall', 2009, 'Watson', '100', 'A');
 
---Teaches
+--teaches
 create table teaches(
   ID VARCHAR(5),
   course_id VARCHAR(8),
@@ -139,7 +141,7 @@ insert into teaches values('83821', 'CS-190', '2', 'Spring', 2009);
 insert into teaches values('83821', 'CS-319', '2', 'Spring', 2010);
 insert into teaches values('98345', 'EE-181', '1', 'Spring', 2009);
 
---Student
+--student
 CREATE TABLE student(
   ID VARCHAR(5),
   name VARCHAR(20) NOT NULL,
@@ -163,7 +165,7 @@ INSERT INTO student VALUES('76653', 'Aoi', 'Elec. Eng.', 60);
 INSERT INTO student VALUES('98765', 'Bourikas', 'Elec. Eng.', 98);
 INSERT INTO student VALUES('98988', 'Tanaka', 'Biology', 120);
 
---Takes
+--takes
 CREATE TABLE takes(
   ID VARCHAR(5),
   course_id VARCHAR(8),
@@ -219,4 +221,7 @@ CREATE VIEW instructor_info AS
   SELECT ID, name, building
   FROM instructor, department
   WHERE instructor.dept_name = department.dept_name;
-  
+CREATE VIEW history_instructors AS
+  SELECT *
+  FROM instructor
+  WHERE dept_name = 'History';
