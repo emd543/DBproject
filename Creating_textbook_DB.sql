@@ -124,7 +124,7 @@ INSERT INTO section VALUES('MU-199', '1', 'Spring', 2010, 'Packard', '101', 'D')
 INSERT INTO section VALUES('PHY-101', '1', 'Fall', 2009, 'Watson', '100', 'A');
 
 --teaches
-create table teaches(
+CREATE TABLE teaches(
   ID VARCHAR(5),
   course_id VARCHAR(8),
   sec_id VARCHAR(8),
@@ -135,28 +135,28 @@ create table teaches(
   REFERENCES section(course_id, sec_id, semester, year),
   FOREIGN KEY(ID) REFERENCES instructor(ID)
 );
-insert into teaches values('10101', 'CS-101', '1', 'Fall', 2009);
-insert into teaches values('10101', 'CS-315', '1', 'Spring', 2010);
-insert into teaches values('10101', 'CS-347', '1', 'Fall', 2009);
-insert into teaches values('12121', 'FIN-201', '1', 'Spring', 2010);
-insert into teaches values('15151', 'MU-199', '1', 'Spring', 2010);
-insert into teaches values('22222', 'PHY-101', '1', 'Fall', 2009);
-insert into teaches values('32343', 'HIS-351', '1', 'Spring', 2010);
-insert into teaches values('45565', 'CS-101', '1', 'Spring', 2010);
-insert into teaches values('45565', 'CS-319', '1', 'Spring', 2010);
-insert into teaches values('76766', 'BIO-101', '1', 'Summer', 2009);
-insert into teaches values('76766', 'BIO-301', '1', 'Summer', 2010);
-insert into teaches values('83821', 'CS-190', '1', 'Spring', 2009);
-insert into teaches values('83821', 'CS-190', '2', 'Spring', 2009);
-insert into teaches values('83821', 'CS-319', '2', 'Spring', 2010);
-insert into teaches values('98345', 'EE-181', '1', 'Spring', 2009);
+INSERT INTO teaches values('10101', 'CS-101', '1', 'Fall', 2009);
+INSERT INTO teaches values('10101', 'CS-315', '1', 'Spring', 2010);
+INSERT INTO teaches values('10101', 'CS-347', '1', 'Fall', 2009);
+INSERT INTO teaches values('12121', 'FIN-201', '1', 'Spring', 2010);
+INSERT INTO teaches values('15151', 'MU-199', '1', 'Spring', 2010);
+INSERT INTO teaches values('22222', 'PHY-101', '1', 'Fall', 2009);
+INSERT INTO teaches values('32343', 'HIS-351', '1', 'Spring', 2010);
+INSERT INTO teaches values('45565', 'CS-101', '1', 'Spring', 2010);
+INSERT INTO teaches values('45565', 'CS-319', '1', 'Spring', 2010);
+INSERT INTO teaches values('76766', 'BIO-101', '1', 'Summer', 2009);
+INSERT INTO teaches values('76766', 'BIO-301', '1', 'Summer', 2010);
+INSERT INTO teaches values('83821', 'CS-190', '1', 'Spring', 2009);
+INSERT INTO teaches values('83821', 'CS-190', '2', 'Spring', 2009);
+INSERT INTO teaches values('83821', 'CS-319', '2', 'Spring', 2010);
+INSERT INTO teaches values('98345', 'EE-181', '1', 'Spring', 2009);
 
 --student
 CREATE TABLE student(
   ID VARCHAR(5),
   name VARCHAR(20) NOT NULL,
   dept_name VARCHAR(20),
-  total_cred NUMERIC(3,0),
+  total_cred NUMERIC(3,0) DEFAULT 0,
   PRIMARY KEY(ID),
   FOREIGN KEY(dept_name)
   REFERENCES department(dept_name) ON DELETE SET NULL
@@ -243,3 +243,15 @@ CREATE VIEW history_instructors AS
   SELECT *
   FROM instructor
   WHERE dept_name = 'History';
+
+--Assertions, which apparently MySQL does not support
+CREATE ASSERTION credits_earned_constraint
+CHECK (NOT EXISTS (SELECT ID
+FROM student
+WHERE tot_cred <> (SELECT SUM(credits)
+FROM takes NATURAL JOIN course
+WHERE student.ID = takes.ID
+AND grade IS NOT NULL AND grade <> 'F')));
+
+--Indices
+CREATE INDEX studentID_index ON student(ID);
