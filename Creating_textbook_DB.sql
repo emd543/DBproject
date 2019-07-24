@@ -1,5 +1,9 @@
---Creates all of the relevent relations used in my Databases
---textbook. (Add textbook copyright info, etc)
+--Creates all of the relevent relations used in the textbook:
+--A. Silberschatz, H. Korth, S. Sudarshan, Database System
+--Concepts, 6th Edition, McGraw-Hill, 2009.
+--http://www.db-book.com
+--I am making this file basically so that I can replicate
+--the demonstrations and exercises used in the book.
 
 CREATE DATABASE textbook;
 
