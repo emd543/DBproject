@@ -72,3 +72,21 @@ phpmyadmin couldn't log into the MySQL server.
 Uninstalled MySQL, downloaded MySQL 8.0.17
 Installed again, this time with legacy password encryption
 Now phpmyadmin works.
+
+php -S localhost:4000
+"PHP 7.1.23 Development Server started at Thu Jul 25 16:37:39 2019
+Listening on http://localhost:4000
+Document root is /
+Press Ctrl-C to quit."
+
+cd /
+mkdir www
+Permission denied
+
+"Evans-MacBook-Pro-2:~ evan$ cd Sites
+Evans-MacBook-Pro-2:Sites evan$ php -S localhost:4000
+PHP 7.1.23 Development Server started at Thu Jul 25 16:41:42 2019
+Listening on http://localhost:4000
+Document root is /Users/evan/Sites
+Press Ctrl-C to quit."
+This gives me the document root that I want.
