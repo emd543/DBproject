@@ -58,3 +58,17 @@ Home directory
 nano .bash_profile
 Verified that this had:
 export PATH="/usr/local/mysql/bin:$PATH"
+
+Fix 2002 socket error:
+sudo mkdir /var/mysql
+sudo ln -s /tmp/mysql.sock /var/mysql/mysql.sock
+
+Unzipped phpmyadmin, and renamed the new folder to "phpmyadmin"
+Moved that folder into ~/Sites/
+mkdir ~/Sites/phpmyadmin/config
+http://localhost/~evan/phpmyadmin/setup/
+
+phpmyadmin couldn't log into the MySQL server.
+Uninstalled MySQL, downloaded MySQL 8.0.17
+Installed again, this time with legacy password encryption
+Now phpmyadmin works.
