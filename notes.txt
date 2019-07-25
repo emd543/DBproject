@@ -49,3 +49,12 @@ Include /private/etc/apache2/extra/httpd-userdir.conf
 Uncommented:
 LoadModule include_module libexec/apache2/mod_include.so
 LoadModule rewrite_module libexec/apache2/mod_rewrite.so
+
+sudo nano /etc/apache2/extra/httpd-userdir.conf
+Made sure the following was uncommented:
+Include /private/etc/apache2/users/*.conf
+
+Home directory
+nano .bash_profile
+Verified that this had:
+export PATH="/usr/local/mysql/bin:$PATH"
