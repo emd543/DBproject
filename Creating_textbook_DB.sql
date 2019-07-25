@@ -2,6 +2,8 @@
 --A. Silberschatz, H. Korth, S. Sudarshan, Database System
 --Concepts, 6th Edition, McGraw-Hill, 2009.
 --http://www.db-book.com
+--All rights reserved by the authors and publishers, and all
+--copyrights are the property of their respective owners.
 --I am making this file basically so that I can replicate
 --the demonstrations and exercises used in the book.
 
