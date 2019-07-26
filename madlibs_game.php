@@ -7,7 +7,7 @@
   </head>
   <body>
 
-    <form action="site.php" method="get">
+    <form action="site.php" method="post">
       Noun: <input type="text" name="noun"><br>
       Person in room: <input type="text" name="personInRoom"><br>
       Verb: <input type="text" name="verb"><br>
@@ -18,11 +18,11 @@
     </form>
 
     <?php
-    $noun = $_GET["noun"];
-    $personInRoom = $_GET["personInRoom"];
-    $verb = $_GET["verb"];
-    $bodyPart = $_GET["bodyPart"];
-    $adjective = $_GET["adjective"];
+    $noun = $_POST["noun"];
+    $personInRoom = $_POST["personInRoom"];
+    $verb = $_POST["verb"];
+    $bodyPart = $_POST["bodyPart"];
+    $adjective = $_POST["adjective"];
     echo "It was Thanksgiving, and the scent of succulent roast $noun wafted through my house. '$personInRoom, it's time to $verb!' my mother called. I couldn't wait to get my $bodyPart on that $adjective Thanksgiving meal.";
      ?>
 
