@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Title</title>
+    <title>Madlibs Game</title>
 
   </head>
   <body>
